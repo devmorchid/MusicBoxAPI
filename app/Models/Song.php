@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Artist extends Model
+class Song extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'genre', 'country'];
+    protected $fillable = ['title', 'duration', 'album_id'];
 
-    public function albums()
+    public function album()
     {
-        return $this->hasMany(Album::class);
+        return $this->belongsTo(Album::class);
     }
 }
-
