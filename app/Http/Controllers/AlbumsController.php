@@ -2,56 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Artist;
 use Illuminate\Http\Request;
-
-class ArtistController extends Controller
+use App\Models\Album;
+class AlbumsController extends Controller
 {
-   /**
+    //
+    /**
  * @OA\Get(
- *     path="/api/artists",
- *     summary="Get list of artists",
- *     tags={"Artists"},
+ *     path="/api/albums",
+ *     summary="Get list of albums",
+ *     tags={"Albums"},
  *     @OA\Response(
  *         response=200,
- *         description="List of artists"
+ *         description="List of albums"
  *     )
  * )
  */
 public function index()
 {
-    return Artist::all();
+    return Album::all();
 }
 
 /**
  * @OA\Post(
- *     path="/api/artists",
- *     summary="Create new artist",
- *     tags={"Artists"},
+ *     path="/api/albums",
+ *     summary="Create new album",
+ *     tags={"Albums"},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             required={"name"},
- *             @OA\Property(property="name", type="string", example="Michael Jackson")
+ *             required={"title", "artist_id"},
+ *             @OA\Property(property="title", type="string", example="Thriller"),
+ *             @OA\Property(property="artist_id", type="integer", example=1)
  *         )
  *     ),
  *     @OA\Response(
  *         response=201,
- *         description="Artist created"
+ *         description="Album created"
  *     )
  * )
  */
 public function store(Request $request)
 {
-    $artist = Artist::create($request->all());
-    return response()->json($artist, 201);
+    $album = Album::create($request->all());
+    return response()->json($album, 201);
 }
 
 /**
  * @OA\Get(
- *     path="/api/artists/{id}",
- *     summary="Get artist by ID",
- *     tags={"Artists"},
+ *     path="/api/albums/{id}",
+ *     summary="Get album by ID",
+ *     tags={"Albums"},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -60,24 +61,24 @@ public function store(Request $request)
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Artist found"
+ *         description="Album found"
  *     ),
  *     @OA\Response(
  *         response=404,
- *         description="Artist not found"
+ *         description="Album not found"
  *     )
  * )
  */
 public function show($id)
 {
-    return Artist::findOrFail($id);
+    return Album::findOrFail($id);
 }
 
 /**
  * @OA\Put(
- *     path="/api/artists/{id}",
- *     summary="Update artist",
- *     tags={"Artists"},
+ *     path="/api/albums/{id}",
+ *     summary="Update album",
+ *     tags={"Albums"},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -87,27 +88,28 @@ public function show($id)
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             @OA\Property(property="name", type="string", example="New Artist Name")
+ *             @OA\Property(property="title", type="string", example="Bad"),
+ *             @OA\Property(property="artist_id", type="integer", example=1)
  *         )
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Artist updated"
+ *         description="Album updated"
  *     )
  * )
  */
 public function update(Request $request, $id)
 {
-    $artist = Artist::findOrFail($id);
-    $artist->update($request->all());
-    return $artist;
+    $album = Album::findOrFail($id);
+    $album->update($request->all());
+    return $album;
 }
 
 /**
  * @OA\Delete(
- *     path="/api/artists/{id}",
- *     summary="Delete artist",
- *     tags={"Artists"},
+ *     path="/api/albums/{id}",
+ *     summary="Delete album",
+ *     tags={"Albums"},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -116,13 +118,13 @@ public function update(Request $request, $id)
  *     ),
  *     @OA\Response(
  *         response=204,
- *         description="Artist deleted"
+ *         description="Album deleted"
  *     )
  * )
  */
 public function destroy($id)
 {
-    Artist::destroy($id);
+    Album::destroy($id);
     return response()->json(null, 204);
 }
 
