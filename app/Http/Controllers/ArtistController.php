@@ -18,6 +18,25 @@ class ArtistController extends Controller
  *     )
  * )
  */
+
+   /**
+ * @OA\Get(
+ *     path="/api/artists",
+ *     summary="Get list of artists",
+ *     tags={"Artists"},
+ *     @OA\Parameter(
+ *         name="genre",
+ *         in="query",
+ *         description="Filter by genre",
+ *         required=false,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Successful operation"
+ *     )
+ * )
+ */
 public function index()
 {
     return Artist::all();

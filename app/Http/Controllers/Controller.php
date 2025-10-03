@@ -6,22 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
-
-/**
- * @OA\Info(
- *     version="1.0.0",
- *     title="MusicBox API",
- *     description="Documentation of MusicBox API with Swagger in Laravel 10",
- *     @OA\Contact(
- *         email="support@musicbox.com"
- *     )
- * )
- */
-
 class Controller extends BaseController
 {
-
-
     use AuthorizesRequests, ValidatesRequests;
-    
 }
